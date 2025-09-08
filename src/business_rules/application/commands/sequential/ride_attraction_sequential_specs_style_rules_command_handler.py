@@ -29,22 +29,22 @@ from business_rules.domain.ride_registration import RideRegistration
 from business_rules.domain.ride_registration_repository import (
     RideRegistrationRepository,
 )
-from business_rules.domain.specifications.sequential.has_capacity_available_specification import (
+from business_rules.domain.sequential.specifications.has_capacity_available_specification import (
     HasCapacityAvailableSpecification,
 )
-from business_rules.domain.specifications.sequential.has_favorable_weather_specification import (
+from business_rules.domain.sequential.specifications.has_favorable_weather_specification import (
     HasFavorableWeatherSpecification,
 )
-from business_rules.domain.specifications.sequential.is_attraction_open_specification import (
+from business_rules.domain.sequential.specifications.is_attraction_open_specification import (
     IsAttractionOpenSpecification,
 )
-from business_rules.domain.specifications.sequential.is_attraction_operational_specification import (
+from business_rules.domain.sequential.specifications.is_attraction_operational_specification import (
     IsAttractionOperationalSpecification,
 )
-from business_rules.domain.specifications.sequential.is_tall_enough_specification import (
+from business_rules.domain.sequential.specifications.is_tall_enough_specification import (
     IsTallEnoughSpecification,
 )
-from business_rules.domain.specifications.sequential.requires_fast_pass_during_peak_for_popular_specification import (
+from business_rules.domain.sequential.specifications.requires_fast_pass_during_peak_for_popular_specification import (
     RequiresFastPassDuringPeakForPopularSpecification,
 )
 from business_rules.domain.weather import Weather
