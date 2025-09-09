@@ -3,6 +3,9 @@ from __future__ import annotations
 from unittest.mock import create_autospec
 import pytest
 
+from business_rules.application.commands.composable_resolver.ride_attraction_composable_resolver_policy import (
+    RideAttractionComposableResolverPolicyCommandHandler,
+)
 from business_rules.application.commands.context_resolver.ride_attraction_context_resolver_policy import (
     RideAttractionContextResolverPolicyCommandHandler,
 )
@@ -40,6 +43,9 @@ from business_rules.application.queries.find_attraction import (
 from business_rules.domain.ride_registration_repository import (
     RideRegistrationRepository,
 )
+from business_rules.infrastructure.composable_resolver.ride_attraction_lazy_composable_resolver import (
+    LazyRideAttractionComposableResolver,
+)
 from business_rules.infrastructure.context_resolver.ride_attraction_lazy_context_resolver import (
     LazyRideAttractionContextResolver,
 )
@@ -67,6 +73,7 @@ ATTRACTION_ID = "a1"
         RideAttractionSequentialSpecsStyleRulesCommandHandler,
         RideAttractionStaticContextPolicyCommandHandler,
         RideAttractionContextResolverPolicyCommandHandler,
+        RideAttractionComposableResolverPolicyCommandHandler,
     ],
     scope="function",
 )
@@ -227,6 +234,15 @@ class TestRideAttractionCommandHandler:
             return self._handler_cls(
                 repo=self._repo,
                 context_resolver=LazyRideAttractionContextResolver(
+                    query_bus=self._query_bus, metrics=self._metrics
+                ),
+                metrics=self._metrics,
+            )
+
+        if self._handler_cls == RideAttractionComposableResolverPolicyCommandHandler:
+            return self._handler_cls(
+                repo=self._repo,
+                context_resolver=LazyRideAttractionComposableResolver(
                     query_bus=self._query_bus, metrics=self._metrics
                 ),
                 metrics=self._metrics,
