@@ -25,6 +25,9 @@ from business_rules.application.commands.sequential.ride_attraction_sequential_s
 from business_rules.application.commands.static_context.ride_attraction_static_context_policy import (
     RideAttractionStaticContextPolicyCommandHandler,
 )
+from business_rules.application.commands.untyped_resolver.ride_attraction_untyped_resolver_policy import (
+    RideAttractionUntypedResolverPolicyCommandHandler,
+)
 from business_rules.domain.exceptions import AccessDenied
 from business_rules.domain.exceptions import AccessTemporarilyDenied
 from business_rules.application.queries.find_person import (
@@ -48,6 +51,9 @@ from business_rules.infrastructure.composable_resolver.ride_attraction_lazy_comp
 )
 from business_rules.infrastructure.context_resolver.ride_attraction_lazy_context_resolver import (
     LazyRideAttractionContextResolver,
+)
+from business_rules.infrastructure.untyped_resolver.ride_attraction_lazy_untyped_resolver import (
+    LazyRideAttractionUntypedResolver,
 )
 from shared.infrastructure import FakeQueryBus
 from shared.infrastructure.in_memory_metrics_recorder import InMemoryMetricsRecorder
@@ -74,6 +80,7 @@ ATTRACTION_ID = "a1"
         RideAttractionStaticContextPolicyCommandHandler,
         RideAttractionContextResolverPolicyCommandHandler,
         RideAttractionComposableResolverPolicyCommandHandler,
+        RideAttractionUntypedResolverPolicyCommandHandler,
     ],
     scope="function",
 )
@@ -243,6 +250,15 @@ class TestRideAttractionCommandHandler:
             return self._handler_cls(
                 repo=self._repo,
                 context_resolver=LazyRideAttractionComposableResolver(
+                    query_bus=self._query_bus, metrics=self._metrics
+                ),
+                metrics=self._metrics,
+            )
+
+        if self._handler_cls == RideAttractionUntypedResolverPolicyCommandHandler:
+            return self._handler_cls(
+                repo=self._repo,
+                context_resolver=LazyRideAttractionUntypedResolver(
                     query_bus=self._query_bus, metrics=self._metrics
                 ),
                 metrics=self._metrics,
