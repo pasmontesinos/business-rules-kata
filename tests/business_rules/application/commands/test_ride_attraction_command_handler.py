@@ -3,6 +3,9 @@ from __future__ import annotations
 from unittest.mock import create_autospec
 import pytest
 
+from business_rules.application.commands.context_resolver.ride_attraction_context_resolver_policy import (
+    RideAttractionContextResolverPolicyCommandHandler,
+)
 from business_rules.application.commands.ride_attraction_command import (
     RideAttractionCommand,
 )
@@ -37,6 +40,9 @@ from business_rules.application.queries.find_attraction import (
 from business_rules.domain.ride_registration_repository import (
     RideRegistrationRepository,
 )
+from business_rules.infrastructure.context_resolver.ride_attraction_lazy_context_resolver import (
+    LazyRideAttractionContextResolver,
+)
 from shared.infrastructure import FakeQueryBus
 from shared.infrastructure.in_memory_metrics_recorder import InMemoryMetricsRecorder
 from tests.shared.infrastructure.get_call_param import get_call_param
@@ -60,6 +66,7 @@ ATTRACTION_ID = "a1"
         RideAttractionSequentialLumperStyleRulesCommandHandler,
         RideAttractionSequentialSpecsStyleRulesCommandHandler,
         RideAttractionStaticContextPolicyCommandHandler,
+        RideAttractionContextResolverPolicyCommandHandler,
     ],
     scope="function",
 )
@@ -216,6 +223,15 @@ class TestRideAttractionCommandHandler:
         )
 
     def _build_command_handler(self):
+        if self._handler_cls == RideAttractionContextResolverPolicyCommandHandler:
+            return self._handler_cls(
+                repo=self._repo,
+                context_resolver=LazyRideAttractionContextResolver(
+                    query_bus=self._query_bus, metrics=self._metrics
+                ),
+                metrics=self._metrics,
+            )
+
         return self._handler_cls(
             repo=self._repo, query_bus=self._query_bus, metrics=self._metrics
         )
