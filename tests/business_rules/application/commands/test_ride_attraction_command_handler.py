@@ -16,6 +16,9 @@ from business_rules.application.commands.sequential.ride_attraction_sequential_s
 from business_rules.application.commands.sequential.ride_attraction_sequential_splitter_style_rules_command_handler import (
     RideAttractionSequentialSplitterStyleRulesCommandHandler,
 )
+from business_rules.application.commands.static_context.ride_attraction_static_context_policy import (
+    RideAttractionStaticContextPolicyCommandHandler,
+)
 from business_rules.domain.exceptions import AccessDenied
 from business_rules.domain.exceptions import AccessTemporarilyDenied
 from business_rules.application.queries.find_person import (
@@ -56,6 +59,7 @@ ATTRACTION_ID = "a1"
         RideAttractionSequentialSplitterStyleRulesCommandHandler,
         RideAttractionSequentialLumperStyleRulesCommandHandler,
         RideAttractionSequentialSpecsStyleRulesCommandHandler,
+        RideAttractionStaticContextPolicyCommandHandler,
     ],
     scope="function",
 )
