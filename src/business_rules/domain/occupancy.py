@@ -4,6 +4,6 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class AttractionOccupancy:
+class Occupancy:
     current_occupancy: int
     capacity: int

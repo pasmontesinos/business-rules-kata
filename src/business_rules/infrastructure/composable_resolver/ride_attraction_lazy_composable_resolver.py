@@ -5,7 +5,7 @@ from business_rules.domain.composable_resolver.ride_attraction_composable_resolv
 )
 from business_rules.domain.person import Person
 from business_rules.domain.weather import Weather
-from business_rules.domain.attraction_occupancy import AttractionOccupancy
+from business_rules.domain.occupancy import Occupancy
 from business_rules.domain.attraction import Attraction
 from business_rules.domain.park_status import ParkStatus
 from business_rules.infrastructure.composable_resolver.query_attraction_resolver import (
@@ -64,7 +64,7 @@ class LazyRideAttractionComposableResolver(RideAttractionComposableResolver):
         return self._weather_resolver.weather
 
     @property
-    def occupancy(self) -> AttractionOccupancy:
+    def occupancy(self) -> Occupancy:
         return self._occupancy_resolver.occupancy
 
     @property

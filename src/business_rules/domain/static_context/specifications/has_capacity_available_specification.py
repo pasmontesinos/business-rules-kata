@@ -14,6 +14,6 @@ from shared.domain.specification_result import SpecificationResult
 class HasCapacityAvailableSpecification(RideAttractionStaticContextSpecification):
     def check(self, context: RideAttractionStaticContext) -> SpecificationResult:
         if context.occupancy.current_occupancy >= context.occupancy.capacity:
-            return SpecificationResult(False, "Attraction at full capacity")
+            return SpecificationResult(False, "Full capacity")
 
         return SpecificationResult(True, "")

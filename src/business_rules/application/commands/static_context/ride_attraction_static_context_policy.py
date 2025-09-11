@@ -5,7 +5,7 @@ from business_rules.application.commands.ride_attraction_command import (
     RideAttractionCommand,
 )
 from business_rules.domain.attraction import Attraction
-from business_rules.domain.attraction_occupancy import AttractionOccupancy
+from business_rules.domain.occupancy import Occupancy
 from business_rules.domain.exceptions import AccessDenied, AccessTemporarilyDenied
 from business_rules.application.queries.find_current_attraction_occupancy import (
     FindCurrentAttractionOccupancyQuery,
@@ -101,7 +101,7 @@ class RideAttractionStaticContextPolicyCommandHandler(RideAttractionCommandHandl
 
     def _get_current_attraction_occupancy(
         self, command: RideAttractionCommand
-    ) -> AttractionOccupancy:
+    ) -> Occupancy:
         self._metrics.query("FindCurrentAttractionOccupancy")
         occupancy = self._query_bus.ask(
             FindCurrentAttractionOccupancyQuery(attraction_id=command.attraction_id)

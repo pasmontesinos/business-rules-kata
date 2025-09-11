@@ -96,4 +96,4 @@ class RideAttractionSequentialLumperStyleRulesCommandHandler(
             FindCurrentAttractionOccupancyQuery(attraction_id=command.attraction_id)
         )
         if occupancy.current_occupancy == occupancy.capacity:
-            raise AccessTemporarilyDenied("Attraction at full capacity")
+            raise AccessTemporarilyDenied("Full capacity")

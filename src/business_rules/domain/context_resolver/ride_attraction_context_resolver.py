@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from business_rules.domain.person import Person
 from business_rules.domain.weather import Weather
-from business_rules.domain.attraction_occupancy import AttractionOccupancy
+from business_rules.domain.occupancy import Occupancy
 from business_rules.domain.attraction import Attraction
 from business_rules.domain.park_status import ParkStatus
 
@@ -22,7 +22,7 @@ class RideAttractionContextResolver(ABC):
 
     @property
     @abstractmethod
-    def occupancy(self) -> AttractionOccupancy: ...
+    def occupancy(self) -> Occupancy: ...
 
     @property
     @abstractmethod

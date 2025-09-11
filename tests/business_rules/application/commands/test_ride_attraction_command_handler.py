@@ -59,7 +59,7 @@ from shared.infrastructure import FakeQueryBus
 from shared.infrastructure.in_memory_metrics_recorder import InMemoryMetricsRecorder
 from tests.shared.infrastructure.get_call_param import get_call_param
 from business_rules.domain.weather import Weather
-from business_rules.domain.attraction_occupancy import AttractionOccupancy
+from business_rules.domain.occupancy import Occupancy
 from business_rules.domain.attraction import Attraction
 from business_rules.domain.park_status import ParkStatus
 from business_rules.application.queries.find_current_park_status import (
@@ -171,7 +171,7 @@ class TestRideAttractionCommandHandler:
     def test_should_deny_access_temporarily_when_full_capacity(self) -> None:
         self._query_bus.query_to_result(
             FindCurrentAttractionOccupancyQuery(attraction_id=ATTRACTION_ID),
-            AttractionOccupancy(current_occupancy=10, capacity=10),
+            Occupancy(current_occupancy=10, capacity=10),
         )
 
         with pytest.raises(AccessTemporarilyDenied) as exc:
@@ -179,7 +179,7 @@ class TestRideAttractionCommandHandler:
                 RideAttractionCommand(person_id=PERSON_ID, attraction_id=ATTRACTION_ID)
             )
 
-        assert str(exc.value) == "Attraction at full capacity"
+        assert str(exc.value) == "Full capacity"
 
     def test_should_deny_access_when_attraction_is_closed(self) -> None:
         self._query_bus.query_to_result(
@@ -231,7 +231,7 @@ class TestRideAttractionCommandHandler:
                 ),
                 FindCurrentAttractionOccupancyQuery(
                     attraction_id=ATTRACTION_ID
-                ): AttractionOccupancy(current_occupancy=0, capacity=10),
+                ): Occupancy(current_occupancy=0, capacity=10),
                 FindCurrentParkStatusQuery(): ParkStatus(peak_hours=True),
             }
         )

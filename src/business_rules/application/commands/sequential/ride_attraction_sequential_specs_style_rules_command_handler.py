@@ -5,7 +5,7 @@ from business_rules.application.commands.ride_attraction_command import (
     RideAttractionCommand,
 )
 from business_rules.domain.attraction import Attraction
-from business_rules.domain.attraction_occupancy import AttractionOccupancy
+from business_rules.domain.occupancy import Occupancy
 from business_rules.domain.exceptions import AccessDenied, AccessTemporarilyDenied
 from business_rules.application.queries.find_current_attraction_occupancy import (
     FindCurrentAttractionOccupancyQuery,
@@ -68,7 +68,7 @@ class RideAttractionSequentialSpecsStyleRulesCommandHandler(
         self._person: Person | None = None
         self._attraction: Attraction | None = None
         self._weather: Weather | None = None
-        self._occupancy: AttractionOccupancy | None = None
+        self._occupancy: Occupancy | None = None
         self._park_status: ParkStatus | None = None
 
     def handle(self, command: RideAttractionCommand) -> None:
@@ -155,7 +155,7 @@ class RideAttractionSequentialSpecsStyleRulesCommandHandler(
 
     def _get_current_attraction_occupancy(
         self, command: RideAttractionCommand
-    ) -> AttractionOccupancy:
+    ) -> Occupancy:
         if self._occupancy:
             return self._occupancy
 

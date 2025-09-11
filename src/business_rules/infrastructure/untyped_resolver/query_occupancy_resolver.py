@@ -1,7 +1,7 @@
 from business_rules.application.queries.find_current_attraction_occupancy import (
     FindCurrentAttractionOccupancyQuery,
 )
-from business_rules.domain.attraction_occupancy import AttractionOccupancy
+from business_rules.domain.occupancy import Occupancy
 from shared.application import QueryBus
 from shared.domain.metrics_recorder import MetricsRecorder
 
@@ -11,14 +11,14 @@ class QueryOccupancyResolver:
         self._query_bus = query_bus
         self._metrics = metrics
         self._attraction_id: str | None = None
-        self._occupancy: AttractionOccupancy | None = None
+        self._occupancy: Occupancy | None = None
 
     def bind(self, attraction_id: str) -> None:
         self._attraction_id = attraction_id
         self._occupancy = None
 
     @property
-    def occupancy(self) -> AttractionOccupancy:
+    def occupancy(self) -> Occupancy:
         if self._occupancy:
             return self._occupancy
 

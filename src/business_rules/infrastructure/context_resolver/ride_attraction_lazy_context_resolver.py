@@ -7,7 +7,7 @@ from business_rules.domain.context_resolver.ride_attraction_context_resolver imp
 )
 from business_rules.domain.person import Person
 from business_rules.domain.weather import Weather
-from business_rules.domain.attraction_occupancy import AttractionOccupancy
+from business_rules.domain.occupancy import Occupancy
 from business_rules.domain.attraction import Attraction
 from business_rules.domain.park_status import ParkStatus
 from shared.application import QueryBus
@@ -39,7 +39,7 @@ class LazyRideAttractionContextResolver(RideAttractionContextResolver):
 
         self._person: Optional[Person] = None
         self._weather: Optional[Weather] = None
-        self._occupancy: Optional[AttractionOccupancy] = None
+        self._occupancy: Optional[Occupancy] = None
         self._attraction: Optional[Attraction] = None
         self._park_status: Optional[ParkStatus] = None
 
@@ -83,7 +83,7 @@ class LazyRideAttractionContextResolver(RideAttractionContextResolver):
         return self._weather
 
     @property
-    def occupancy(self) -> AttractionOccupancy:
+    def occupancy(self) -> Occupancy:
         if self._occupancy:
             return self._occupancy
 

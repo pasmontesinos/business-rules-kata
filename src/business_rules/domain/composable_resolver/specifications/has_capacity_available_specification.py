@@ -14,6 +14,6 @@ from shared.domain.specification_result import SpecificationResult
 class HasCapacityAvailableSpecification(Specification[OccupancyResolver]):
     def check(self, resolver: OccupancyResolver) -> SpecificationResult:
         if resolver.occupancy.current_occupancy >= resolver.occupancy.capacity:
-            return SpecificationResult(False, "Attraction at full capacity")
+            return SpecificationResult(False, "Full capacity")
 
         return SpecificationResult(True, "")
