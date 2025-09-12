@@ -102,7 +102,9 @@ class TestRideAttractionCommandHandler:
 
     def test_should_create_ride_registration(self) -> None:
         self._command_handler.handle(
-            RideAttractionCommand(person_id=PERSON_ID, attraction_id=ATTRACTION_ID)
+            RideAttractionCommand(
+                person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+            )
         )
 
         saved = get_call_param(self._repo.save)
@@ -118,7 +120,9 @@ class TestRideAttractionCommandHandler:
         with pytest.raises(AccessDenied) as exc:
             self._command_handler.handle(
                 RideAttractionCommand(
-                    person_id=LOW_HEIGHT_PERSON_ID, attraction_id=ATTRACTION_ID
+                    person_id=LOW_HEIGHT_PERSON_ID,
+                    attraction_id=ATTRACTION_ID,
+                    country_code="ES",
                 )
             )
 
@@ -132,7 +136,9 @@ class TestRideAttractionCommandHandler:
 
         with pytest.raises(AccessTemporarilyDenied) as exc:
             self._command_handler.handle(
-                RideAttractionCommand(person_id=PERSON_ID, attraction_id=ATTRACTION_ID)
+                RideAttractionCommand(
+                    person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                )
             )
 
         assert str(exc.value) == "Adverse weather"
@@ -145,7 +151,9 @@ class TestRideAttractionCommandHandler:
 
         with pytest.raises(AccessTemporarilyDenied) as exc:
             self._command_handler.handle(
-                RideAttractionCommand(person_id=PERSON_ID, attraction_id=ATTRACTION_ID)
+                RideAttractionCommand(
+                    person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                )
             )
 
         assert str(exc.value) == "Under maintenance, please wait"
@@ -164,7 +172,9 @@ class TestRideAttractionCommandHandler:
 
         with pytest.raises(AccessDenied) as exc:
             self._command_handler.handle(
-                RideAttractionCommand(person_id=PERSON_ID, attraction_id=ATTRACTION_ID)
+                RideAttractionCommand(
+                    person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                )
             )
         assert str(exc.value) == "Person height below minimum"
 
@@ -176,7 +186,9 @@ class TestRideAttractionCommandHandler:
 
         with pytest.raises(AccessTemporarilyDenied) as exc:
             self._command_handler.handle(
-                RideAttractionCommand(person_id=PERSON_ID, attraction_id=ATTRACTION_ID)
+                RideAttractionCommand(
+                    person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                )
             )
 
         assert str(exc.value) == "Full capacity"
@@ -189,7 +201,9 @@ class TestRideAttractionCommandHandler:
 
         with pytest.raises(AccessDenied) as exc:
             self._command_handler.handle(
-                RideAttractionCommand(person_id=PERSON_ID, attraction_id=ATTRACTION_ID)
+                RideAttractionCommand(
+                    person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                )
             )
 
         assert str(exc.value) == "Attraction closed"
@@ -202,7 +216,9 @@ class TestRideAttractionCommandHandler:
 
         with pytest.raises(AccessDenied) as exc:
             self._command_handler.handle(
-                RideAttractionCommand(person_id=PERSON_ID, attraction_id=ATTRACTION_ID)
+                RideAttractionCommand(
+                    person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                )
             )
 
         assert (

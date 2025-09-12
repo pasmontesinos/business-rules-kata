@@ -9,3 +9,4 @@ from shared.application.command import Command
 class RideAttractionCommand(Command):
     person_id: str
     attraction_id: str
+    country_code: str
