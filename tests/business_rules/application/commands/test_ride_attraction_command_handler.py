@@ -67,7 +67,6 @@ from business_rules.application.queries.find_current_park_status import (
 )
 
 PERSON_ID = "p1"
-LOW_HEIGHT_PERSON_ID = "p2"
 ATTRACTION_ID = "a1"
 COUNTRY_CODE = "ES"
 
@@ -116,14 +115,14 @@ class TestRideAttractionCommandHandler:
 
     def test_should_deny_access_when_person_height_is_below_minimum(self) -> None:
         self._query_bus.query_to_result(
-            FindPersonQuery(person_id=LOW_HEIGHT_PERSON_ID),
-            Person(person_id=LOW_HEIGHT_PERSON_ID, height_cm=119),
+            FindPersonQuery(person_id=PERSON_ID),
+            Person(person_id=PERSON_ID, height_cm=119),
         )
 
         with pytest.raises(AccessDenied) as exc:
             self._command_handler.handle(
                 RideAttractionCommand(
-                    person_id=LOW_HEIGHT_PERSON_ID,
+                    person_id=PERSON_ID,
                     attraction_id=ATTRACTION_ID,
                     country_code=COUNTRY_CODE,
                 )
