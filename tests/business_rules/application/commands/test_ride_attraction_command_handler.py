@@ -69,6 +69,7 @@ from business_rules.application.queries.find_current_park_status import (
 PERSON_ID = "p1"
 LOW_HEIGHT_PERSON_ID = "p2"
 ATTRACTION_ID = "a1"
+COUNTRY_CODE = "ES"
 
 
 @pytest.mark.parametrize(
@@ -103,7 +104,9 @@ class TestRideAttractionCommandHandler:
     def test_should_create_ride_registration(self) -> None:
         self._command_handler.handle(
             RideAttractionCommand(
-                person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                person_id=PERSON_ID,
+                attraction_id=ATTRACTION_ID,
+                country_code=COUNTRY_CODE,
             )
         )
 
@@ -122,7 +125,7 @@ class TestRideAttractionCommandHandler:
                 RideAttractionCommand(
                     person_id=LOW_HEIGHT_PERSON_ID,
                     attraction_id=ATTRACTION_ID,
-                    country_code="ES",
+                    country_code=COUNTRY_CODE,
                 )
             )
 
@@ -137,7 +140,9 @@ class TestRideAttractionCommandHandler:
         with pytest.raises(AccessTemporarilyDenied) as exc:
             self._command_handler.handle(
                 RideAttractionCommand(
-                    person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                    person_id=PERSON_ID,
+                    attraction_id=ATTRACTION_ID,
+                    country_code=COUNTRY_CODE,
                 )
             )
 
@@ -152,7 +157,9 @@ class TestRideAttractionCommandHandler:
         with pytest.raises(AccessTemporarilyDenied) as exc:
             self._command_handler.handle(
                 RideAttractionCommand(
-                    person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                    person_id=PERSON_ID,
+                    attraction_id=ATTRACTION_ID,
+                    country_code=COUNTRY_CODE,
                 )
             )
 
@@ -173,7 +180,9 @@ class TestRideAttractionCommandHandler:
         with pytest.raises(AccessDenied) as exc:
             self._command_handler.handle(
                 RideAttractionCommand(
-                    person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                    person_id=PERSON_ID,
+                    attraction_id=ATTRACTION_ID,
+                    country_code=COUNTRY_CODE,
                 )
             )
         assert str(exc.value) == "Person height below minimum"
@@ -187,7 +196,9 @@ class TestRideAttractionCommandHandler:
         with pytest.raises(AccessTemporarilyDenied) as exc:
             self._command_handler.handle(
                 RideAttractionCommand(
-                    person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                    person_id=PERSON_ID,
+                    attraction_id=ATTRACTION_ID,
+                    country_code=COUNTRY_CODE,
                 )
             )
 
@@ -202,7 +213,9 @@ class TestRideAttractionCommandHandler:
         with pytest.raises(AccessDenied) as exc:
             self._command_handler.handle(
                 RideAttractionCommand(
-                    person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                    person_id=PERSON_ID,
+                    attraction_id=ATTRACTION_ID,
+                    country_code=COUNTRY_CODE,
                 )
             )
 
@@ -217,7 +230,9 @@ class TestRideAttractionCommandHandler:
         with pytest.raises(AccessDenied) as exc:
             self._command_handler.handle(
                 RideAttractionCommand(
-                    person_id=PERSON_ID, attraction_id=ATTRACTION_ID, country_code="ES"
+                    person_id=PERSON_ID,
+                    attraction_id=ATTRACTION_ID,
+                    country_code=COUNTRY_CODE,
                 )
             )
 
